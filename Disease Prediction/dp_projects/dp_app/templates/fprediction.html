@@ -1,0 +1,152 @@
+{% extends "parent.html" %}
+{% block body %}
+<style>
+  body {
+    background-color: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .upload-container {
+    margin: 60px auto;
+    width: 60%;
+    max-width: 700px;
+    padding: 40px 30px;
+    background: linear-gradient(to bottom right, #ffffff, #e0f2f1);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .upload-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .upload-container h2 {
+    font-size: 2.2rem;
+    color: #00695c;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .upload-container h3 {
+    font-size: 1.5rem;
+    color: #c62828;
+    margin-top: 25px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .prediction-underline {
+    margin-top: 15px;
+    border: none;
+    height: 2px;
+    background: #4caf50;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .table {
+    margin-top: 30px;
+  }
+
+  .table td {
+    padding: 12px;
+    border: none;
+    font-size: 1rem;
+    vertical-align: middle !important;
+    font-weight: 500;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+  }
+
+  .btn-success {
+    width: 120px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    background-color: #43a047;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+
+  .btn-success:hover {
+    background-color: #2e7d32;
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 768px) {
+    .upload-container {
+      width: 90%;
+      padding: 25px;
+    }
+
+    .upload-container h2 {
+      font-size: 1.7rem;
+    }
+
+    .upload-container h3 {
+      font-size: 1.3rem;
+    }
+
+    .btn-success {
+      width: 100%;
+    }
+
+    .table td {
+      display: block;
+      text-align: left;
+    }
+
+    .table tr {
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+</style>
+
+<div class="upload-container">
+  <h2>
+    <i class="fa-solid fa-file-upload"></i> Upload File for Health Prediction
+  </h2>
+
+  {% if res %}
+    <h3>Predicted Disease: <span>{{ res }}</span></h3>
+    <hr class="prediction-underline" />
+  {% endif %}
+
+  <form class="form-group" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="table table-bordered">
+      <tr>
+        <td>Select Report File</td>
+        <td>
+          <input type="file" name="csv_file" class="form-control" required />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="text-center">
+          <button type="submit" class="btn btn-success">Predict</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}

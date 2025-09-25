@@ -1,0 +1,99 @@
+{% extends "parent.html" %}
+{% block body %}
+<style>
+  .hero-section {
+    background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .hero-section:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .hero-heading {
+    color: #00695c;
+    font-weight: 700;
+    font-size: 2.3rem;
+    text-shadow: 1px 1px 2px rgba(0, 105, 92, 0.15);
+  }
+
+  .hero-subtext {
+    color: #004d40;
+    font-size: 1.15rem;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .hero-buttons .btn {
+    font-size: 1.05rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+  }
+
+  .hero-buttons .btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-buttons .btn-outline-success:hover {
+    background-color: #00695c;
+    color: white;
+  }
+
+  .hero-buttons .btn-outline-primary:hover {
+    background-color: #0d47a1;
+    color: white;
+  }
+
+  .hero-buttons .btn-outline-dark:hover {
+    background-color: #333;
+    color: white;
+  }
+
+  @media (max-width: 576px) {
+    .hero-section {
+      padding: 2rem 1.2rem;
+    }
+
+    .hero-heading {
+      font-size: 1.75rem;
+    }
+
+    .hero-buttons .btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+</style>
+
+<div class="hero-section mx-auto col-md-10 col-lg-8">
+  <h2 class="hero-heading">
+    <i class="fa-solid fa-house-chimney me-2"></i>Welcome to the Disease Prediction System
+  </h2>
+  <p class="hero-subtext">
+    Predict diseases quickly and accurately using symptoms or health files.<br>
+    <span class="fw-semibold">Your health, our ML-powered care.</span>
+  </p>
+
+  <div class="hero-buttons d-flex justify-content-center gap-3 flex-wrap">
+    <a href="{% url 'prediction' %}" class="btn btn-outline-success">
+      <i class="fa-solid fa-stethoscope me-2"></i> Predict Disease
+    </a>
+    <a href="{% url 'fprediction' %}" class="btn btn-outline-primary">
+      <i class="fa-solid fa-file-medical me-2"></i> Upload Health File
+    </a>
+    <a href="{% url 'history' %}" class="btn btn-outline-dark">
+      <i class="fa-solid fa-clock-rotate-left me-2"></i> View History
+    </a>
+  </div>
+</div>
+{% endblock body %}

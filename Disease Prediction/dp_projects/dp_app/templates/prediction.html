@@ -1,0 +1,243 @@
+{% extends "parent.html" %}
+{% block body %}
+<style>
+  .prediction-heading {
+    color: #265f66;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .underline-divider {
+    width: 180px;
+    height: 4px;
+    background: linear-gradient(to right, #00796b, #4db6ac);
+    margin: 0 auto 20px auto;
+    border-radius: 4px;
+    animation: slideIn 0.7s ease-in-out;
+  }
+
+  .prediction-result {
+    color: #d32f2f;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    animation: slideIn 0.5s ease-in-out;
+  }
+
+  .prediction-form {
+    max-width: 95%;
+    margin: auto;
+    background-color: #eef7f7ff;
+    border-radius: 14px;
+    padding: 25px 30px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.7s ease;
+  }
+
+  .prediction-form table {
+    margin-bottom: 0;
+  }
+
+  .prediction-form td {
+    vertical-align: middle;
+    font-weight: 500;
+    color: #13191cff;
+    padding: 12px;
+  }
+
+  .form-select {
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: 0.3s ease;
+  }
+
+  .form-select:focus {
+    border-color: #137066ff;
+    box-shadow: 0 0 0 0.15rem rgba(0, 121, 107, 0.25);
+  }
+
+  .predict-btn {
+    background-color: #265f66;
+    color: white;
+    padding: 10px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    transition: 0.3s ease-in-out;
+  }
+
+  .predict-btn:hover {
+    background-color: #1b474d;
+    color: #ece2e2cc;
+    transform: scale(1.04);
+  }
+
+  .clear-btn {
+    padding: 10px 28px;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #607d8b;
+    background-color: transparent;
+    color: #455a64;
+  }
+
+  .clear-btn:hover {
+    background-color: #b0bec5;
+    color: #fff;
+    transform: scale(1.03);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media screen and (max-width: 768px) {
+    .prediction-form table {
+      font-size: 0.95rem;
+    }
+
+    .clear-btn,
+    .predict-btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+</style>
+
+<!-- HEADING -->
+<h2 class="prediction-heading">
+  <i class="fa-solid fa-stethoscope me-2"></i>Disease Prediction
+</h2>
+
+<!-- UNDERLINE BELOW HEADING -->
+<div class="underline-divider"></div>
+
+<!-- RESULT -->
+{% if res %}
+  <div class="prediction-result">
+    <i class="fa-solid fa-heart-pulse me-2"></i>Predicted Disease: {{ res }}
+  </div>
+
+  <!-- UNDERLINE BELOW RESULT -->
+  <div class="underline-divider"></div>
+{% endif %}
+
+<!-- FORM -->
+<form method="post" class="form-group prediction-form">
+  {% csrf_token %}
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Fever</td>
+        <td>
+          <select class="form-select" name="fever">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+        <td>Headache</td>
+        <td>
+          <select class="form-select" name="headache">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Nausea</td>
+        <td>
+          <select class="form-select" name="nausea">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+        <td>Vomiting</td>
+        <td>
+          <select class="form-select" name="vomiting">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Fatigue</td>
+        <td>
+          <select class="form-select" name="fatigue">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+        <td>Joint Pain</td>
+        <td>
+          <select class="form-select" name="joint_pain">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Skin Rash</td>
+        <td>
+          <select class="form-select" name="skin_rash">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+        <td>Cough</td>
+        <td>
+          <select class="form-select" name="cough">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Weight Loss</td>
+        <td>
+          <select class="form-select" name="weight_loss">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+        <td>Yellow Eyes</td>
+        <td>
+          <select class="form-select" name="yellow_eyes">
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-center py-3">
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <button type="reset" class="btn clear-btn">
+              <i class="fa-solid fa-eraser me-2"></i> Clear
+            </button>
+            <button type="submit" class="btn predict-btn">
+              <i class="fa-solid fa-microscope me-2"></i> Predict
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+{% endblock body %}

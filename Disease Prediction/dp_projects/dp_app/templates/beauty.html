@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Disease Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <style>
+      .nav-link:hover {
+        background-color: #e74c3c;
+        color: white !important;
+        border-radius: 5px;
+      }
+      footer {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      
+      <!-- Header -->
+      <header class="bg-danger text-light text-center py-3 fs-2 fw-bold shadow">
+        Disease Prediction System
+      </header>
+
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold" href="{% url 'index' %}">DPS</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'prediction' %}">Disease Prediction</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'fprediction' %}">File Prediction</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'history' %}">History Prediction</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+              <button class="btn btn-light" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Banner Image -->
+      <div class="row mt-3">
+        <div class="col-sm-12">
+          <img src="{% static 'images/img.jpg' %}" class="img-fluid rounded shadow" style="width: 100%; height: 250px; object-fit: cover;" alt="Banner Image">
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <main class="row mt-3">
+        <div class="col-sm-12 p-4" style="background-color: rgb(235, 248, 247); min-height: 600px;">
+          {% block body %}
+          {% endblock body %}
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="row text-center text-light">
+        <div class="col-md-6 bg-danger py-3 fs-5">© DPS - All Rights Reserved</div>
+        <div class="col-md-6 bg-danger py-3 fs-5">Developed by: Vishwas Abhi</div>
+      </footer>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  </body>
+</html>
